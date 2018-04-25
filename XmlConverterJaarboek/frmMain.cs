@@ -4,6 +4,7 @@ using System.Data.OleDb;
 using System.Xml;
 using System.Collections.Generic;
 using XmlConverterJaarboek.Entities;
+using System.Data.OleDb;
 
 namespace XmlConverterJaarboek
 {
@@ -31,7 +32,9 @@ namespace XmlConverterJaarboek
                 }
             }
 
-            using (OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db.mdb"))
+            using (OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.16.0;Data Source=db.mdb"))
+            //using (OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db.mdb"))
+            //using (OleDbConnection conn = new OleDbConnection(@"Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=db.mdb;"))
             {
                 conn.Open();
 
@@ -55,10 +58,10 @@ namespace XmlConverterJaarboek
                     MessageBox.Show("No doctors for specialisation: " + specialisation);
                 }
 
-                writer.WriteElementString("_09_Einde", "");
+                writer.WriteElementString("_09_Einde", Characters.PARAGRAPH_SEP);
                 ConvertDoctorsForInExtenso(conn, specialisation, "MS", writer);
                 ConvertDoctorsForInExtenso(conn, specialisation, "CS", writer);
-                writer.WriteElementString("_09_Einde", "");
+                writer.WriteElementString("_09_Einde", Characters.PARAGRAPH_SEP);
                 ConvertDoctorsForInExtensoPerProvince(conn, specialisation, writer);
             }
 
@@ -68,13 +71,13 @@ namespace XmlConverterJaarboek
 
         private void ConvertDoctorsForInExtensoPerProvince(OleDbConnection conn, string inextenso, XmlWriter writer)
         {
-            writer.WriteElementString("_05_Titel", "Liste par province/Lijst per provincie");
+            writer.WriteElementString("_05_Titel", "Liste par province/Lijst per provincie" + Characters.PARAGRAPH_SEP);
 
             Dictionary<string, List<SimpleDoctor>> docsPerProvince = GetDoctorsForInExtensoPerProvince(conn, inextenso);
 
             foreach (string orderedProvince in Properties.Settings.Default.ProvArrondMapOrder)
             {
-                writer.WriteElementString("_06_Provincie", orderedProvince.ToUpper());
+                writer.WriteElementString("_06_Provincie", orderedProvince.ToUpper() + Characters.PARAGRAPH_SEP);
 
                 List<SimpleDoctor> doctors = docsPerProvince[orderedProvince];
                 string previousPostalCode = null;
@@ -83,11 +86,11 @@ namespace XmlConverterJaarboek
                 {
                     if (previousPostalCode == null || previousPostalCode != doctor.PostalCode)
                     {
-                        writer.WriteElementString("_07_Stad", doctor.PostalCode + " " + doctor.Town.ToUpper());
+                        writer.WriteElementString("_07_Stad", doctor.PostalCode + " " + doctor.Town.ToUpper() + Characters.PARAGRAPH_SEP);
                         previousPostalCode = doctor.PostalCode;
                     }
 
-                    writer.WriteElementString("_08_Gegevens", doctor.LastName.ToUpper() + " " + doctor.FirstName);
+                    writer.WriteElementString("_08_Gegevens", doctor.LastName.ToUpper() + " " + doctor.FirstName + Characters.PARAGRAPH_SEP);
                 }
 
             }
@@ -98,22 +101,31 @@ namespace XmlConverterJaarboek
         private void ConvertDoctorsForInExtenso(OleDbConnection conn, string inextenso, string csms, XmlWriter writer)
         {
             bool titleDone = false;
+            bool firstDoctor = true;
+
             foreach (Doctor doctor in GetDoctorsForInExtenso(conn, inextenso, csms))
             {
                 if (csms == "CS" && !titleDone)
                 {
-                    writer.WriteElementString("_04_Titel", "CANDIDATS SPECIALISTES•KANDIDATEN-SPECIALISTEN");
+                    writer.WriteElementString("_04_Titel", "CANDIDATS SPECIALISTES•KANDIDATEN-SPECIALISTEN" + Characters.PARAGRAPH_SEP);
                     titleDone = true;
                 }
 
-                writer.WriteElementString("_02_Naam", doctor.GetFormattedDetails());
+                if (csms != "CS" && firstDoctor)
+                {
+                    writer.WriteElementString("_02_Naam1", doctor.GetFormattedDetails() + Characters.PARAGRAPH_SEP);
+                    firstDoctor = false;
+                } else
+                {
+                    writer.WriteElementString("_02_Naam", doctor.GetFormattedDetails() + Characters.PARAGRAPH_SEP);
+                }
 
                 bool first = true;
                 foreach (ContactDetails contactDetails in doctor.ContactDetails)
                 {
                     var elementName = first ? "_03_Gegevens1" : "_03_Gegevens2";
 
-                    writer.WriteElementString(elementName, contactDetails.GetFormattedDetails());
+                    writer.WriteElementString(elementName, contactDetails.GetFormattedDetails() + Characters.PARAGRAPH_SEP);
 
                     first = false;
                 }
@@ -151,7 +163,7 @@ namespace XmlConverterJaarboek
                         LastName = reader["NOM"].ToString(),
                         INAMI = reader["NoINAMI"].ToString(),
                         Language = reader["Langue"].ToString(),
-                        InExtenso = reader["InExtenso"].ToString(),
+                        InExtenso = reader["InExtensoNew"].ToString(),
                         Competence1 = reader["Compétence1"].ToString(),
                         Competence2 = reader["Compétence2"].ToString()
                     };

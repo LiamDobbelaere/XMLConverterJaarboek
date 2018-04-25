@@ -8,9 +8,11 @@ namespace XmlConverterJaarboek
     class Queries
     {
         public static string DOCTORS_FOR_INEXTENSO = 
-            "SELECT * FROM [annuaire 2017] WHERE InExtenso = @inextenso AND CSouMS = @csms ORDER BY NOM, Institution";
+            "SELECT x.* FROM(SELECT *, " + Properties.Settings.Default.InExtensoNew + " FROM [annuaire 2017]) AS x " +
+            "WHERE x.InExtensoNew = @inextenso AND x.CSouMS = @csms ORDER BY x.NOM, x.Institution";
         public static string DOCTORS_FOR_INEXTENSO_PERPROVINCE =
-            "SELECT * FROM [annuaire 2017] WHERE InExtenso = @inextenso AND ProvArrond IS NOT NULL " +
-            "ORDER BY ProvArrond, Poste, NOM";
+            "SELECT x.* FROM(SELECT *, " + Properties.Settings.Default.InExtensoNew + " FROM [annuaire 2017]) AS x " +
+            "WHERE x.InExtensoNew = @inextenso AND x.ProvArrond IS NOT NULL " +
+            "ORDER BY x.ProvArrond, x.Poste, x.NOM";
     }
 }

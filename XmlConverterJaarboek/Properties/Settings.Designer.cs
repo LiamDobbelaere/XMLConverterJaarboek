@@ -59,5 +59,16 @@ namespace XmlConverterJaarboek.Properties {
                 return ((global::System.Collections.Specialized.StringCollection)(this["SpecialisationOrder"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(InExtenso, 'KLINISCHE BIOL.', 'BIOL. CLINIQUE'), 'PLASTISCHE CH.', 'CH. PLASTIQUE'), 'MAAG-DARM.', 'GASTRO-ENTERO.'), 'URGENTIEGEN.', 'MED. URGENCE'), 'INWENDIGE GEN.', 'MED. INTERNE'), 
+'KERNGENEESKUNDE', 'MED. NUCLEAIRE'), 'FYSISCHE-GEN.', 'MED. PHYSIQUE'), 'KINDERNEUROLOGIE', 'NEUROPEDIATRIE'), 'OOGHEELKUNDE', 'OPHTALMOLOGIE'), 'KINDERGEN.', 'PEDIATRIE'), 'R. DIAGNOSE', 'R. DIAGNOSTIC'), 'REUMATOLOGIE', 'RHUMATOLOGIE'), 'INTENS. ZORGEN', 'SOINS INTENSIFS'), 'REVALIDATIE', 'READAPTION'), 'N.K.O.', 'O.R.L.')
+AS InExtensoNew")]
+        public string InExtensoNew {
+            get {
+                return ((string)(this["InExtensoNew"]));
+            }
+        }
     }
 }

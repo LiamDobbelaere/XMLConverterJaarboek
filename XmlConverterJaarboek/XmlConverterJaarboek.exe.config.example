@@ -22,8 +22,7 @@
             <string>71,72,73=Limburg</string>
             <string>81,82,83,84,85=Luxembourg</string>
             <string>91,92,93=Namur</string>
-            <string>A,a=A L'etranger - in het Buitenland</string>
-            <string>C=Onbekend</string>
+            <string>A,a,C=A L'etranger - in het Buitenland</string>
           </ArrayOfString>
         </value>
       </setting>
@@ -43,7 +42,6 @@
             <string>Luxembourg</string>
             <string>Namur</string>
             <string>A L'etranger - in het Buitenland</string>
-            <string>Onbekend</string>
           </ArrayOfString>
         </value>
       </setting>
@@ -55,49 +53,41 @@
             <string>ANEST-REANIM.</string>
             <string>BIOL. CLINIQUE</string>
             <string>CARDIOLOGIE</string>
-            <string>CH. PLASTIQUE</string>
             <string>CHIRURGIE</string>
+            <string>CH. PLASTIQUE</string>
             <string>DERMATO-VENER.</string>
-            <string>FYSISCHE GEN.</string>
             <string>GASTRO-ENTERO.</string>
             <string>GERIATRIE</string>
             <string>GYNECOLOGIE</string>
-            <string>HEALTH DATA MAN.</string>
-            <string>INTENS. ZORGEN</string>
-            <string>INWENDIGE GEN.</string>
-            <string>KERNGENEESKUNDE</string>
-            <string>KINDERGEN.</string>
-            <string>KINDERNEUROLOGIE</string>
-            <string>KLINISCHE BIOL.</string>
-            <string>MAAG-DARM.</string>
+            <string>MED. URGENCE</string>
             <string>MED. INTERNE</string>
             <string>MED. NUCLEAIRE</string>
             <string>MED. PHYSIQUE</string>
-            <string>MED. URGENCE</string>
-            <string>N.K.O.</string>
             <string>NEUROCHIRURGIE</string>
             <string>NEUROLOGIE</string>
             <string>NEUROPEDIATRIE</string>
-            <string>O.R.L.</string>
-            <string>OOGHEELKUNDE</string>
             <string>OPHTALMOLOGIE</string>
             <string>ORTHOPEDIE</string>
+            <string>O.R.L.</string>
             <string>PEDIATRIE</string>
-            <string>PLASTISCHE CH.</string>
             <string>PNEUMOLOGIE</string>
             <string>PSYCHIATRIE</string>
-            <string>R. DIAGNOSE</string>
             <string>R. DIAGNOSTIC</string>
-            <string>R.THERAPIE-ONCO.</string>
-            <string>READAPTION</string>
-            <string>REUMATOLOGIE</string>
-            <string>REVALIDATIE</string>
+            <string>R.THERAPIE-ONCO</string>
             <string>RHUMATOLOGIE</string>
             <string>SOINS INTENSIFS</string>
             <string>STOMATOLOGIE</string>
-            <string>URGENTIEGEN.</string>
             <string>UROLOGIE</string>
+            <string>READAPTION</string>
+            <string>HEALTH DATA MAN.</string>
           </ArrayOfString>
+        </value>
+      </setting>
+      <setting name="InExtensoNew" serializeAs="String">
+        <value>
+          Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(InExtenso, 'KLINISCHE BIOL.', 'BIOL. CLINIQUE'), 'PLASTISCHE CH.', 'CH. PLASTIQUE'), 'MAAG-DARM.', 'GASTRO-ENTERO.'), 'URGENTIEGEN.', 'MED. URGENCE'), 'INWENDIGE GEN.', 'MED. INTERNE'),
+          'KERNGENEESKUNDE', 'MED. NUCLEAIRE'), 'FYSISCHE-GEN.', 'MED. PHYSIQUE'), 'KINDERNEUROLOGIE', 'NEUROPEDIATRIE'), 'OOGHEELKUNDE', 'OPHTALMOLOGIE'), 'KINDERGEN.', 'PEDIATRIE'), 'R. DIAGNOSE', 'R. DIAGNOSTIC'), 'REUMATOLOGIE', 'RHUMATOLOGIE'), 'INTENS. ZORGEN', 'SOINS INTENSIFS'), 'REVALIDATIE', 'READAPTION'), 'N.K.O.', 'O.R.L.')
+          AS InExtensoNew
         </value>
       </setting>
     </XmlConverterJaarboek.Properties.Settings>

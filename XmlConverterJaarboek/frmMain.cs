@@ -9,6 +9,8 @@ namespace XmlConverterJaarboek
 {
     public partial class frmMain : Form
     {
+        Dictionary<string, string> provArrondMapping;
+
         public frmMain()
         {
             InitializeComponent();
@@ -16,6 +18,19 @@ namespace XmlConverterJaarboek
 
         private void FormLoad(object sender, EventArgs e)
         {
+            provArrondMapping = new Dictionary<string, string>();
+            
+            foreach (string mapping in Properties.Settings.Default.ProvArrondMapping)
+            {
+                var province = mapping.Split('=')[1];
+                var values = mapping.Split('=')[0].Split(',');
+                
+                foreach (string value in values)
+                {
+                    provArrondMapping.Add(value, province);
+                }
+            }
+
             using (OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db.mdb"))
             {
                 conn.Open();
@@ -37,9 +52,39 @@ namespace XmlConverterJaarboek
             ConvertDoctorsForAffiliation(conn, "AP", "MS", writer);
             ConvertDoctorsForAffiliation(conn, "AP", "CS", writer);
             writer.WriteElementString("_09_Einde", "");
+            ConvertDoctorsForAffiliationPerProvince(conn, "AP", writer);
 
             writer.WriteEndElement();
             writer.Flush();
+        }
+
+        private void ConvertDoctorsForAffiliationPerProvince(OleDbConnection conn, string affiliation, XmlWriter writer)
+        {
+            writer.WriteElementString("_05_Titel", "Liste par province/Lijst per provincie");
+
+            Dictionary<string, List<SimpleDoctor>> docsPerProvince = GetDoctorsForAffiliationPerProvince(conn, affiliation);
+
+            foreach (string orderedProvince in Properties.Settings.Default.ProvArrondMapOrder)
+            {
+                writer.WriteElementString("_06_Provincie", orderedProvince.ToUpper());
+
+                List<SimpleDoctor> doctors = docsPerProvince[orderedProvince];
+                string previousPostalCode = null;
+
+                foreach (SimpleDoctor doctor in doctors)
+                {
+                    if (previousPostalCode == null || previousPostalCode != doctor.PostalCode)
+                    {
+                        writer.WriteElementString("_07_Stad", doctor.PostalCode + " " + doctor.Town.ToUpper());
+                        previousPostalCode = doctor.PostalCode;
+                    }
+
+                    writer.WriteElementString("_08_Gegevens", doctor.LastName.ToUpper() + " " + doctor.FirstName);
+                }
+
+            }
+
+
         }
 
         private void ConvertDoctorsForAffiliation(OleDbConnection conn, string affiliation, string csms, XmlWriter writer)
@@ -111,6 +156,55 @@ namespace XmlConverterJaarboek
             reader.Close();
 
             return doctorList;
+        }
+
+        private Dictionary<string, List<SimpleDoctor>> GetDoctorsForAffiliationPerProvince(OleDbConnection conn, string affiliation)
+        {
+            var command = conn.CreateCommand();
+            command.CommandText = Queries.DOCTORS_FOR_AFFILIATION_PERPROVINCE;
+            command.Parameters.AddRange(new OleDbParameter[]
+            {
+               new OleDbParameter("@affiliation", affiliation)
+            });
+
+            Dictionary<string, List<SimpleDoctor>> doctorsPerProvince = new Dictionary<string, List<SimpleDoctor>>(); ;
+
+            foreach (string orderedProvince in Properties.Settings.Default.ProvArrondMapOrder)
+            {
+                doctorsPerProvince.Add(orderedProvince, new List<SimpleDoctor>());
+            }
+
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                SimpleDoctor newDoctor = new SimpleDoctor
+                {
+                    FirstName = reader["PRENOM"].ToString(),
+                    LastName = reader["NOM"].ToString(),
+                    PostalCode = reader["Poste"].ToString(),
+                    Town = reader["Commune"].ToString()
+                };
+
+                if (!provArrondMapping.ContainsKey(reader["ProvArrond"].ToString()))
+                {
+                    MessageBox.Show("Unmapped province for ProvArrond " + reader["ProvArrond"].ToString());
+                }
+                else
+                {
+                    var provinceName = provArrondMapping[reader["ProvArrond"].ToString()];
+
+                    if (!doctorsPerProvince.ContainsKey(provinceName))
+                    {
+                        MessageBox.Show(provinceName);
+                    }
+
+                    doctorsPerProvince[provinceName].Add(newDoctor);
+
+                }
+            }
+            reader.Close();
+
+            return doctorsPerProvince;
         }
 
         private ContactDetails CreateContactDetails(OleDbDataReader reader)

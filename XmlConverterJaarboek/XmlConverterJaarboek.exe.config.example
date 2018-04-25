@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+      <section name="XmlConverterJaarboek.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    </sectionGroup>
+  </configSections>
+  <applicationSettings>
+    <XmlConverterJaarboek.Properties.Settings>
+      <setting name="ProvArrondMapping" serializeAs="Xml">
+        <value>
+          <ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <string>01,02=Vlaams-Brabant</string>
+            <string>11,12,13=Antwerpen</string>
+            <string>21=region bruxelles - Brussels gewest</string>
+            <string>25=Brabant Wallon</string>
+            <string>31,32,33,34,35,36,37,38=West-Vlaanderen</string>
+            <string>41,42,43,44,45,46=Oost-Vlaanderen</string>
+            <string>51,52,53,54,55,56,57=Hainaut</string>
+            <string>61,62,63,64=Liege</string>
+            <string>71,72,73=Limburg</string>
+            <string>81,82,83,84,85=Luxembourg</string>
+            <string>91,92,93=Namur</string>
+            <string>A,a=A L'etranger - in het Buitenland</string>
+            <string>C=Onbekend</string>
+          </ArrayOfString>
+        </value>
+      </setting>
+      <setting name="ProvArrondMapOrder" serializeAs="Xml">
+        <value>
+          <ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <string>Antwerpen</string>
+            <string>region bruxelles - Brussels gewest</string>
+            <string>Vlaams-Brabant</string>
+            <string>Brabant Wallon</string>
+            <string>West-Vlaanderen</string>
+            <string>Oost-Vlaanderen</string>
+            <string>Hainaut</string>
+            <string>Liege</string>
+            <string>Limburg</string>
+            <string>Luxembourg</string>
+            <string>Namur</string>
+            <string>A L'etranger - in het Buitenland</string>
+            <string>Onbekend</string>
+          </ArrayOfString>
+        </value>
+      </setting>
+      <setting name="SpecialisationOrder" serializeAs="Xml">
+        <value>
+          <ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <string>ANAT-PATH.</string>
+            <string>ANEST-REANIM.</string>
+            <string>BIOL. CLINIQUE</string>
+            <string>CARDIOLOGIE</string>
+            <string>CH. PLASTIQUE</string>
+            <string>CHIRURGIE</string>
+            <string>DERMATO-VENER.</string>
+            <string>FYSISCHE GEN.</string>
+            <string>GASTRO-ENTERO.</string>
+            <string>GERIATRIE</string>
+            <string>GYNECOLOGIE</string>
+            <string>HEALTH DATA MAN.</string>
+            <string>INTENS. ZORGEN</string>
+            <string>INWENDIGE GEN.</string>
+            <string>KERNGENEESKUNDE</string>
+            <string>KINDERGEN.</string>
+            <string>KINDERNEUROLOGIE</string>
+            <string>KLINISCHE BIOL.</string>
+            <string>MAAG-DARM.</string>
+            <string>MED. INTERNE</string>
+            <string>MED. NUCLEAIRE</string>
+            <string>MED. PHYSIQUE</string>
+            <string>MED. URGENCE</string>
+            <string>N.K.O.</string>
+            <string>NEUROCHIRURGIE</string>
+            <string>NEUROLOGIE</string>
+            <string>NEUROPEDIATRIE</string>
+            <string>O.R.L.</string>
+            <string>OOGHEELKUNDE</string>
+            <string>OPHTALMOLOGIE</string>
+            <string>ORTHOPEDIE</string>
+            <string>PEDIATRIE</string>
+            <string>PLASTISCHE CH.</string>
+            <string>PNEUMOLOGIE</string>
+            <string>PSYCHIATRIE</string>
+            <string>R. DIAGNOSE</string>
+            <string>R. DIAGNOSTIC</string>
+            <string>R.THERAPIE-ONCO.</string>
+            <string>READAPTION</string>
+            <string>REUMATOLOGIE</string>
+            <string>REVALIDATIE</string>
+            <string>RHUMATOLOGIE</string>
+            <string>SOINS INTENSIFS</string>
+            <string>STOMATOLOGIE</string>
+            <string>URGENTIEGEN.</string>
+            <string>UROLOGIE</string>
+          </ArrayOfString>
+        </value>
+      </setting>
+    </XmlConverterJaarboek.Properties.Settings>
+  </applicationSettings>
+</configuration>

@@ -48,21 +48,29 @@ namespace XmlConverterJaarboek
             var writer = XmlWriter.Create("test.xml");
             writer.WriteStartElement("Root");
 
-            writer.WriteElementString("_09_Einde", "");
-            ConvertDoctorsForAffiliation(conn, "AP", "MS", writer);
-            ConvertDoctorsForAffiliation(conn, "AP", "CS", writer);
-            writer.WriteElementString("_09_Einde", "");
-            ConvertDoctorsForAffiliationPerProvince(conn, "AP", writer);
+            foreach (string specialisation in Properties.Settings.Default.SpecialisationOrder)
+            {
+                if (GetDoctorsForInExtenso(conn, specialisation, "MS").Count == 0)
+                {
+                    MessageBox.Show("No doctors for specialisation: " + specialisation);
+                }
+
+                writer.WriteElementString("_09_Einde", "");
+                ConvertDoctorsForInExtenso(conn, specialisation, "MS", writer);
+                ConvertDoctorsForInExtenso(conn, specialisation, "CS", writer);
+                writer.WriteElementString("_09_Einde", "");
+                ConvertDoctorsForInExtensoPerProvince(conn, specialisation, writer);
+            }
 
             writer.WriteEndElement();
             writer.Flush();
         }
 
-        private void ConvertDoctorsForAffiliationPerProvince(OleDbConnection conn, string affiliation, XmlWriter writer)
+        private void ConvertDoctorsForInExtensoPerProvince(OleDbConnection conn, string inextenso, XmlWriter writer)
         {
             writer.WriteElementString("_05_Titel", "Liste par province/Lijst per provincie");
 
-            Dictionary<string, List<SimpleDoctor>> docsPerProvince = GetDoctorsForAffiliationPerProvince(conn, affiliation);
+            Dictionary<string, List<SimpleDoctor>> docsPerProvince = GetDoctorsForInExtensoPerProvince(conn, inextenso);
 
             foreach (string orderedProvince in Properties.Settings.Default.ProvArrondMapOrder)
             {
@@ -87,10 +95,10 @@ namespace XmlConverterJaarboek
 
         }
 
-        private void ConvertDoctorsForAffiliation(OleDbConnection conn, string affiliation, string csms, XmlWriter writer)
+        private void ConvertDoctorsForInExtenso(OleDbConnection conn, string inextenso, string csms, XmlWriter writer)
         {
             bool titleDone = false;
-            foreach (Doctor doctor in GetDoctorsForAffiliation(conn, affiliation, csms))
+            foreach (Doctor doctor in GetDoctorsForInExtenso(conn, inextenso, csms))
             {
                 if (csms == "CS" && !titleDone)
                 {
@@ -112,13 +120,13 @@ namespace XmlConverterJaarboek
             }
         }
 
-        private List<Doctor> GetDoctorsForAffiliation(OleDbConnection conn, string affiliation, string csms)
+        private List<Doctor> GetDoctorsForInExtenso(OleDbConnection conn, string inextenso, string csms)
         {
             var command = conn.CreateCommand();
-            command.CommandText = Queries.DOCTORS_FOR_AFFILIATION;
+            command.CommandText = Queries.DOCTORS_FOR_INEXTENSO;
             command.Parameters.AddRange(new OleDbParameter[]
             {
-               new OleDbParameter("@affiliation", affiliation),
+               new OleDbParameter("@inextenso", inextenso),
                new OleDbParameter("@csms", csms)
             });
 
@@ -143,7 +151,7 @@ namespace XmlConverterJaarboek
                         LastName = reader["NOM"].ToString(),
                         INAMI = reader["NoINAMI"].ToString(),
                         Language = reader["Langue"].ToString(),
-                        Affiliation = reader["Affiliation"].ToString(),
+                        InExtenso = reader["InExtenso"].ToString(),
                         Competence1 = reader["Compétence1"].ToString(),
                         Competence2 = reader["Compétence2"].ToString()
                     };
@@ -158,13 +166,13 @@ namespace XmlConverterJaarboek
             return doctorList;
         }
 
-        private Dictionary<string, List<SimpleDoctor>> GetDoctorsForAffiliationPerProvince(OleDbConnection conn, string affiliation)
+        private Dictionary<string, List<SimpleDoctor>> GetDoctorsForInExtensoPerProvince(OleDbConnection conn, string inextenso)
         {
             var command = conn.CreateCommand();
-            command.CommandText = Queries.DOCTORS_FOR_AFFILIATION_PERPROVINCE;
+            command.CommandText = Queries.DOCTORS_FOR_INEXTENSO_PERPROVINCE;
             command.Parameters.AddRange(new OleDbParameter[]
             {
-               new OleDbParameter("@affiliation", affiliation)
+               new OleDbParameter("@inextenso", inextenso)
             });
 
             Dictionary<string, List<SimpleDoctor>> doctorsPerProvince = new Dictionary<string, List<SimpleDoctor>>(); ;

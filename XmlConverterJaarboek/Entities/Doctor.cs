@@ -16,7 +16,7 @@ namespace XmlConverterJaarboek.Entities
         public string LastName { get; set; }
         public string Language { get; set; }
         public string INAMI { get; set; }
-        public string Affiliation { get; set; }
+        public string InExtenso { get; set; }
         public string Competence1 { get; set; }
         public string Competence2 { get; set; }
         public List<ContactDetails> ContactDetails { get; set; }

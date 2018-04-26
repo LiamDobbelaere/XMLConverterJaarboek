@@ -80,8 +80,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters.cs" />
+    <Compile Include="Entities\AlphabeticDoctor.cs" />
     <Compile Include="Entities\Doctor.cs" />
     <Compile Include="Entities\ContactDetails.cs" />
+    <Compile Include="Entities\ExtensoDetails.cs" />
     <Compile Include="Entities\SimpleDoctor.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>

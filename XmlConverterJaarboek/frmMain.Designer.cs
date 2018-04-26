@@ -47,10 +47,9 @@
             // 
             // lblCurrent
             // 
-            this.lblCurrent.AutoSize = true;
-            this.lblCurrent.Location = new System.Drawing.Point(9, 51);
+            this.lblCurrent.Location = new System.Drawing.Point(12, 51);
             this.lblCurrent.Name = "lblCurrent";
-            this.lblCurrent.Size = new System.Drawing.Size(55, 17);
+            this.lblCurrent.Size = new System.Drawing.Size(516, 31);
             this.lblCurrent.TabIndex = 1;
             this.lblCurrent.Text = "Waiting";
             // 
@@ -66,7 +65,6 @@
             this.Text = "XmlConverterJaarboek";
             this.Load += new System.EventHandler(this.FormLoad);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

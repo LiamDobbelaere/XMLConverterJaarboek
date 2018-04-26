@@ -4,7 +4,6 @@ using System.Data.OleDb;
 using System.Xml;
 using System.Collections.Generic;
 using XmlConverterJaarboek.Entities;
-using System.Data.OleDb;
 
 namespace XmlConverterJaarboek
 {
@@ -230,6 +229,79 @@ namespace XmlConverterJaarboek
             return doctorList;
         }
 
+        private List<AlphabeticDoctor> GetDoctorsAlphabetic(OleDbConnection conn)
+        {
+            var command = conn.CreateCommand();
+            command.CommandText = Queries.DOCTORS_ALPHABETIC;
+
+            List<AlphabeticDoctor> doctors = new List<AlphabeticDoctor>();
+            var reader = command.ExecuteReader();
+            AlphabeticDoctor newDoctor = null;
+            while (reader.Read())
+            {
+                if (newDoctor != null
+                    && newDoctor.IsSameDoctor(
+                        reader["PRENOM"].ToString(),
+                        reader["NOM"].ToString(),
+                        reader["NoINAMI"].ToString()))
+                {
+                    var containsExtenso = false;
+                    foreach (ExtensoDetails ed in newDoctor.Extensos)
+                    {
+                        if (ed.Name.Equals(reader["InExtensoNew"].ToString()))
+                        {
+                            containsExtenso = true;
+                        }
+                    }
+
+                    if (!containsExtenso)
+                    {
+                        List<string> competences = new List<string>();
+                        competences.Add(reader["Compétence1"].ToString());
+                        if (reader["Competence2Real"].ToString() != "") competences.Add(reader["Competence2Real"].ToString());
+
+                        string competenceString = string.Join("-", competences.ToArray());
+
+                        var newExtenso = new ExtensoDetails
+                        {
+                            Name = reader["InExtensoNew"].ToString(),
+                            Competences = competenceString
+                        };
+
+                        newDoctor.Extensos.Add(newExtenso);
+                    }
+                }
+                else
+                {
+                    newDoctor = new AlphabeticDoctor
+                    {
+                        FirstName = reader["PRENOM"].ToString(),
+                        LastName = reader["NOM"].ToString(),
+                        INAMI = reader["NoINAMI"].ToString()
+                    };
+
+                    List<string> competences = new List<string>();
+                    competences.Add(reader["Compétence1"].ToString());
+                    if (reader["Competence2Real"].ToString() != "") competences.Add(reader["Competence2Real"].ToString());
+
+                    string competenceString = string.Join("-", competences.ToArray());
+
+                    var newExtenso = new ExtensoDetails
+                    {
+                        Name = reader["InExtensoNew"].ToString(),
+                        Competences = competenceString
+                    };
+
+                    newDoctor.Extensos.Add(newExtenso);
+
+                    doctors.Add(newDoctor);
+                }
+            }
+            reader.Close();
+
+            return doctors;
+        }
+
         private Dictionary<string, List<SimpleDoctor>> GetDoctorsForInExtensoPerProvince(OleDbConnection conn, string inextenso)
         {
             var command = conn.CreateCommand();
@@ -298,7 +370,7 @@ namespace XmlConverterJaarboek
 
         private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            var writer = XmlWriter.Create("test.xml");
+            /*var writer = XmlWriter.Create("Lijst_specialiteiten.xml");
             writer.WriteStartElement("Root");
 
             //Properties.Settings.Default.SpecialisationOrder.Count;
@@ -333,6 +405,57 @@ namespace XmlConverterJaarboek
                 i++;
             }
 
+            writer.WriteEndElement();
+            writer.Flush();*/
+
+            XmlWriter writer = XmlWriter.Create("Lijst_Alfabetisch.xml");
+            writer.WriteStartElement("Root");
+
+            backgroundWorker.ReportProgress(100, "Alphabetic list");
+
+            List<AlphabeticDoctor> doctors = GetDoctorsAlphabetic(conn);
+            var i = 0;
+            string currentLetter = null;
+            foreach (AlphabeticDoctor doctor in doctors)
+            {
+                var firstLetter = doctor.LastName.Substring(0, 1).ToUpper();
+
+                if (currentLetter == null || currentLetter != firstLetter)
+                {
+                    if (currentLetter != null)
+                    {
+                        writer.WriteEndElement();
+                    }
+
+                    currentLetter = firstLetter;
+
+                    writer.WriteElementString("nr", currentLetter + Characters.PARAGRAPH_SEP);
+                    writer.WriteStartElement("lijst");
+                }
+
+                bool first = true;
+                foreach (ExtensoDetails extenso in doctor.Extensos)
+                {
+                    var extensoAndNum = extenso.Name + " (" + 
+                        (Properties.Settings.Default.SpecialisationOrder.IndexOf(extenso.Name) + 1).ToString() + ")\t" 
+                        + extenso.Competences + Characters.PARAGRAPH_SEP;
+
+                    if (first)
+                    {
+                        writer.WriteString(doctor.LastName + " " + doctor.FirstName + "\t" + extensoAndNum);
+                    }
+                    else
+                    {
+                        writer.WriteString("\t" + extensoAndNum);
+                    }
+
+                    first = false;
+                }
+
+                i++;
+            }
+
+            writer.WriteEndElement();
             writer.WriteEndElement();
             writer.Flush();
         }

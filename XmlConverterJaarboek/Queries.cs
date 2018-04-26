@@ -20,5 +20,10 @@ namespace XmlConverterJaarboek
             "WHERE (x.Compétence1 = @competence OR x.Competence2Real = @competence) AND x.Affiliation = \"MI\" AND x.Poste IS NOT NULL " +
             "GROUP BY x.NOM, x.PRENOM, x.Poste, x.Commune " +
             "ORDER BY x.Poste, x.NOM";
+        public static string DOCTORS_ALPHABETIC =
+            "SELECT x.NOM, x.PRENOM, x.NoINAMI, x.InExtensoNew, x.Compétence1, x.Competence2Real " +
+            "FROM (SELECT *, IIF(SPECIALITE = \"ONCO_MED\", \"ONCO_MED\", Compétence2) AS Competence2Real, " + 
+            Properties.Settings.Default.InExtensoNew + " FROM [annuaire 2017]) AS x " +
+            "ORDER BY x.NOM, x.PRENOM";
     }
 }

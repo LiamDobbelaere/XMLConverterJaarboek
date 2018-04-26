@@ -5,28 +5,100 @@
     <Setting Name="ProvArrondMapping" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;test&lt;/string&gt;
-  &lt;string&gt;a&lt;/string&gt;
-  &lt;string&gt;b&lt;/string&gt;
-  &lt;string&gt;c&lt;/string&gt;
+  &lt;string&gt;01,02=Vlaams-Brabant&lt;/string&gt;
+  &lt;string&gt;11,12,13=Antwerpen&lt;/string&gt;
+  &lt;string&gt;21=region bruxelles - Brussels gewest&lt;/string&gt;
+  &lt;string&gt;25=Brabant Wallon&lt;/string&gt;
+  &lt;string&gt;31,32,33,34,35,36,37,38=West-Vlaanderen&lt;/string&gt;
+  &lt;string&gt;41,42,43,44,45,46=Oost-Vlaanderen&lt;/string&gt;
+  &lt;string&gt;51,52,53,54,55,56,57=Hainaut&lt;/string&gt;
+  &lt;string&gt;61,62,63,64=Liege&lt;/string&gt;
+  &lt;string&gt;71,72,73=Limburg&lt;/string&gt;
+  &lt;string&gt;81,82,83,84,85=Luxembourg&lt;/string&gt;
+  &lt;string&gt;91,92,93=Namur&lt;/string&gt;
+  &lt;string&gt;A,a,C=A L'etranger - in het Buitenland&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="ProvArrondMapOrder" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;d&lt;/string&gt;
+  &lt;string&gt;Antwerpen&lt;/string&gt;
+  &lt;string&gt;region bruxelles - Brussels gewest&lt;/string&gt;
+  &lt;string&gt;Vlaams-Brabant&lt;/string&gt;
+  &lt;string&gt;Brabant Wallon&lt;/string&gt;
+  &lt;string&gt;West-Vlaanderen&lt;/string&gt;
+  &lt;string&gt;Oost-Vlaanderen&lt;/string&gt;
+  &lt;string&gt;Hainaut&lt;/string&gt;
+  &lt;string&gt;Liege&lt;/string&gt;
+  &lt;string&gt;Limburg&lt;/string&gt;
+  &lt;string&gt;Luxembourg&lt;/string&gt;
+  &lt;string&gt;Namur&lt;/string&gt;
+  &lt;string&gt;A L'etranger - in het Buitenland&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="SpecialisationOrder" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;abc&lt;/string&gt;
+  &lt;string&gt;ANAT-PATH.&lt;/string&gt;
+  &lt;string&gt;ANEST-REANIM.&lt;/string&gt;
+  &lt;string&gt;BIOL. CLINIQUE&lt;/string&gt;
+  &lt;string&gt;CARDIOLOGIE&lt;/string&gt;
+  &lt;string&gt;CHIRURGIE&lt;/string&gt;
+  &lt;string&gt;CH. PLASTIQUE&lt;/string&gt;
+  &lt;string&gt;DERMATO-VENER.&lt;/string&gt;
+  &lt;string&gt;GASTRO-ENTERO.&lt;/string&gt;
+  &lt;string&gt;GERIATRIE&lt;/string&gt;
+  &lt;string&gt;GYNECOLOGIE&lt;/string&gt;
+  &lt;string&gt;MED. URGENCE&lt;/string&gt;
+  &lt;string&gt;MED. INTERNE&lt;/string&gt;
+  &lt;string&gt;MED. NUCLEAIRE&lt;/string&gt;
+  &lt;string&gt;MED. PHYSIQUE&lt;/string&gt;
+  &lt;string&gt;NEUROCHIRURGIE&lt;/string&gt;
+  &lt;string&gt;NEUROLOGIE&lt;/string&gt;
+  &lt;string&gt;NEUROPEDIATRIE&lt;/string&gt;
+  &lt;string&gt;OPHTALMOLOGIE&lt;/string&gt;
+  &lt;string&gt;ORTHOPEDIE&lt;/string&gt;
+  &lt;string&gt;O.R.L.&lt;/string&gt;
+  &lt;string&gt;PEDIATRIE&lt;/string&gt;
+  &lt;string&gt;PNEUMOLOGIE&lt;/string&gt;
+  &lt;string&gt;PSYCHIATRIE&lt;/string&gt;
+  &lt;string&gt;R. DIAGNOSTIC&lt;/string&gt;
+  &lt;string&gt;R.THERAPIE-ONCO&lt;/string&gt;
+  &lt;string&gt;RHUMATOLOGIE&lt;/string&gt;
+  &lt;string&gt;SOINS INTENSIFS&lt;/string&gt;
+  &lt;string&gt;STOMATOLOGIE&lt;/string&gt;
+  &lt;string&gt;UROLOGIE&lt;/string&gt;
+  &lt;string&gt;READAPTION&lt;/string&gt;
+  &lt;string&gt;HEALTH DATA MAN.&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="InExtensoNew" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(InExtenso, 'KLINISCHE BIOL.', 'BIOL. CLINIQUE'), 'PLASTISCHE CH.', 'CH. PLASTIQUE'), 'MAAG-DARM.', 'GASTRO-ENTERO.'), 'URGENTIEGEN.', 'MED. URGENCE'), 'INWENDIGE GEN.', 'MED. INTERNE'), 
-'KERNGENEESKUNDE', 'MED. NUCLEAIRE'), 'FYSISCHE-GEN.', 'MED. PHYSIQUE'), 'KINDERNEUROLOGIE', 'NEUROPEDIATRIE'), 'OOGHEELKUNDE', 'OPHTALMOLOGIE'), 'KINDERGEN.', 'PEDIATRIE'), 'R. DIAGNOSE', 'R. DIAGNOSTIC'), 'REUMATOLOGIE', 'RHUMATOLOGIE'), 'INTENS. ZORGEN', 'SOINS INTENSIFS'), 'REVALIDATIE', 'READAPTION'), 'N.K.O.', 'O.R.L.')
-AS InExtensoNew</Value>
+      <Value Profile="(Default)">Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(InExtenso, 'KLINISCHE BIOL.', 'BIOL. CLINIQUE'), 'PLASTISCHE CH.', 'CH. PLASTIQUE'), 'MAAG-DARM.', 'GASTRO-ENTERO.'), 'URGENTIEGEN.', 'MED. URGENCE'), 'INWENDIGE GEN.', 'MED. INTERNE'),
+          'KERNGENEESKUNDE', 'MED. NUCLEAIRE'), 'FYSISCHE-GEN.', 'MED. PHYSIQUE'), 'KINDERNEUROLOGIE', 'NEUROPEDIATRIE'), 'OOGHEELKUNDE', 'OPHTALMOLOGIE'), 'KINDERGEN.', 'PEDIATRIE'), 'R. DIAGNOSE', 'R. DIAGNOSTIC'), 'REUMATOLOGIE', 'RHUMATOLOGIE'), 'INTENS. ZORGEN', 'SOINS INTENSIFS'), 'REVALIDATIE', 'READAPTION'), 'N.K.O.', 'O.R.L.') AS InExtensoNew</Value>
+    </Setting>
+    <Setting Name="InternalOrder" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;GER&lt;/string&gt;
+  &lt;string&gt;ENDOC&lt;/string&gt;
+  &lt;string&gt;NEPH&lt;/string&gt;
+  &lt;string&gt;HEMAT&lt;/string&gt;
+  &lt;string&gt;SI&lt;/string&gt;
+  &lt;string&gt;MU&lt;/string&gt;
+  &lt;string&gt;ONCO_MED&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="InternalNames" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Internistes gériatres,Internisten geriaters&lt;/string&gt;
+  &lt;string&gt;Internistes endocrino-diabétologues,Internisten endocrino-diabetologen&lt;/string&gt;
+  &lt;string&gt;Internistes néphrologues,Internisten nefrologen&lt;/string&gt;
+  &lt;string&gt;Internistes hématologues,Internisten hematologen&lt;/string&gt;
+  &lt;string&gt;Internistes intensivistes,Internisten intensivisten&lt;/string&gt;
+  &lt;string&gt;Internistes urgentistes,Internisten urgentisten&lt;/string&gt;
+  &lt;string&gt;Internistes oncologues,Internisten oncologen&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

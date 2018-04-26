@@ -12,8 +12,9 @@ namespace XmlConverterJaarboek
             Properties.Settings.Default.InExtensoNew + " FROM [annuaire 2017]) AS x " +
             "WHERE x.InExtensoNew = @inextenso AND x.CSouMS = @csms ORDER BY x.NOM, x.Institution";
         public static string DOCTORS_FOR_INEXTENSO_PERPROVINCE =
-            "SELECT x.* FROM(SELECT *, " + Properties.Settings.Default.InExtensoNew + " FROM [annuaire 2017]) AS x " +
+            "SELECT x.NOM, x.PRENOM, x.NoINAMI, x.Poste, x.Commune, x.CSouMS, x.ProvArrond, x.InExtensoNew FROM(SELECT *, " + Properties.Settings.Default.InExtensoNew + " FROM [annuaire 2017]) AS x " +
             "WHERE x.InExtensoNew = @inextenso AND x.ProvArrond IS NOT NULL " +
+            "GROUP BY x.PRENOM, x.NOM, x.NoINAMI, x.Poste, x.Commune, x.CSouMS, x.ProvArrond, x.InExtensoNew " +
             "ORDER BY x.ProvArrond, x.Poste, x.NOM";
         public static string DOCTORS_INTERNAL_FOR_COMPETENCE_PERPOSTAL =
             "SELECT x.NOM, x.PRENOM, x.Poste, x.Commune FROM(SELECT *, IIF(SPECIALITE = \"ONCO_MED\", \"ONCO_MED\", Compétence2) AS Competence2Real FROM [annuaire 2017]) AS x " +

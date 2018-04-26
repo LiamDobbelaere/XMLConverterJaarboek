@@ -36,11 +36,11 @@ namespace XmlConverterJaarboek.Entities
 
                 string competenceString = string.Join("-", competences.ToArray());
 
-                return string.Format("{0} {1} {2} • {3} • {4}", LastName, FirstName, competenceString, Language, INAMI);
+                return string.Format("{0} {1}\t{2} • {3} • {4}", LastName, FirstName, competenceString, Language, INAMI);
             }
             else
             {
-                return string.Format("{0} {1} {2} • {3}", LastName, FirstName, Language, INAMI);
+                return string.Format("{0} {1}\t{2} • {3}", LastName, FirstName, Language, INAMI);
             }
         }
     }

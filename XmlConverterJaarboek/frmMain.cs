@@ -19,8 +19,6 @@ namespace XmlConverterJaarboek
 
         private void FormLoad(object sender, EventArgs e)
         {
-            
-
             provArrondMapping = new Dictionary<string, string>();
             
             foreach (string mapping in Properties.Settings.Default.ProvArrondMapping)
@@ -106,17 +104,27 @@ namespace XmlConverterJaarboek
 
                 List<SimpleDoctor> doctors = docsPerProvince[orderedProvince];
                 string previousPostalCode = null;
-
+                SimpleDoctor lastDoctor = null;
                 foreach (SimpleDoctor doctor in doctors)
                 {
                     if (previousPostalCode == null || previousPostalCode != doctor.PostalCode)
                     {
                         writer.WriteElementString("_07_Stad", doctor.PostalCode + " " + doctor.Town.ToUpper());
                         previousPostalCode = doctor.PostalCode;
+                        lastDoctor = null;
                     }
 
-                    writer.WriteElementString("_08_Gegevens", doctor.LastName.ToUpper() + " " + doctor.FirstName
+                    bool shouldWriteDoctor = true;
+                    if (lastDoctor != null && lastDoctor.IsSameDoctor(doctor.FirstName, doctor.LastName, doctor.INAMI))
+                        shouldWriteDoctor = false;
+
+                    if (shouldWriteDoctor)
+                    {
+                        writer.WriteElementString("_08_Gegevens", doctor.LastName.ToUpper() + " " + doctor.FirstName
                         + (doctor.CSouMS == "CS" ? " (*)" : ""));
+                    }
+
+                    lastDoctor = doctor;
                 }
 
             }
@@ -328,7 +336,8 @@ namespace XmlConverterJaarboek
                     LastName = reader["NOM"].ToString(),
                     PostalCode = reader["Poste"].ToString(),
                     Town = reader["Commune"].ToString(),
-                    CSouMS = reader["CSouMS"].ToString()
+                    CSouMS = reader["CSouMS"].ToString(),
+                    INAMI = reader["NoINAMI"].ToString()
                 };
 
                 if (!provArrondMapping.ContainsKey(reader["ProvArrond"].ToString()))

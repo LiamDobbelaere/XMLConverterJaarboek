@@ -8,5 +8,7 @@ namespace XmlConverterJaarboek
     class Characters
     {
         public static string PARAGRAPH_SEP = "\u2029";
+        public static string FIXED_SPACE = "\u00A0";
+        public static string NOBREAK_HYPHEN = "\u2011";
     }
 }

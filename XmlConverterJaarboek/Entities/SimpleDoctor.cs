@@ -12,5 +12,11 @@ namespace XmlConverterJaarboek.Entities
         public string PostalCode { get; set; }
         public string Town { get; set; }
         public string CSouMS { get; set; }
+        public string INAMI { get; set; }
+
+        public bool IsSameDoctor(string firstName, string lastName, string inami)
+        {
+            return firstName.Equals(FirstName) && lastName.Equals(lastName) && INAMI.Equals(inami);
+        }
     }
 }

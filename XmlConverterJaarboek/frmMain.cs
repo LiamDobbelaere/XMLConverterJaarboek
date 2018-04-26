@@ -115,7 +115,8 @@ namespace XmlConverterJaarboek
                         previousPostalCode = doctor.PostalCode;
                     }
 
-                    writer.WriteElementString("_08_Gegevens", doctor.LastName.ToUpper() + " " + doctor.FirstName);
+                    writer.WriteElementString("_08_Gegevens", doctor.LastName.ToUpper() + " " + doctor.FirstName
+                        + (doctor.CSouMS == "CS" ? " (*)" : ""));
                 }
 
             }
@@ -326,7 +327,8 @@ namespace XmlConverterJaarboek
                     FirstName = reader["PRENOM"].ToString(),
                     LastName = reader["NOM"].ToString(),
                     PostalCode = reader["Poste"].ToString(),
-                    Town = reader["Commune"].ToString()
+                    Town = reader["Commune"].ToString(),
+                    CSouMS = reader["CSouMS"].ToString()
                 };
 
                 if (!provArrondMapping.ContainsKey(reader["ProvArrond"].ToString()))
@@ -370,7 +372,7 @@ namespace XmlConverterJaarboek
 
         private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            /*var writer = XmlWriter.Create("Lijst_specialiteiten.xml");
+            var writer = XmlWriter.Create("Lijst_specialiteiten.xml");
             writer.WriteStartElement("Root");
 
             //Properties.Settings.Default.SpecialisationOrder.Count;
@@ -406,15 +408,15 @@ namespace XmlConverterJaarboek
             }
 
             writer.WriteEndElement();
-            writer.Flush();*/
+            writer.Flush();
 
-            XmlWriter writer = XmlWriter.Create("Lijst_Alfabetisch.xml");
+            writer = XmlWriter.Create("Lijst_Alfabetisch.xml");
             writer.WriteStartElement("Root");
 
             backgroundWorker.ReportProgress(100, "Alphabetic list");
 
             List<AlphabeticDoctor> doctors = GetDoctorsAlphabetic(conn);
-            var i = 0;
+            i = 0;
             string currentLetter = null;
             foreach (AlphabeticDoctor doctor in doctors)
             {

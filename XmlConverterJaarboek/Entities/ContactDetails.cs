@@ -25,13 +25,23 @@ namespace XmlConverterJaarboek.Entities
             if (Institution != "") details.Add(Institution);
             if (StreetName != "") details.Add(StreetName + " " + StreetNumber);
             if (PostalCode != "") details.Add(PostalCode + " " + Town);
-            if (Telephone != "")
+            if (Telephone != "" && Telephone.Equals(Fax))
             {
-                details.Add("T " + Telephone);
+                if (Telephone != "")
+                {
+                    details.Add("T/F " + Telephone);
+                }
             }
-            if (Fax != "")
+            else
             {
-                details.Add("F " + Fax);
+                if (Telephone != "")
+                {
+                    details.Add("T " + Telephone);
+                }
+                if (Fax != "")
+                {
+                    details.Add("F " + Fax);
+                }
             }
             if (Cellphone != "")
             {

@@ -4,6 +4,7 @@ using System.Data.OleDb;
 using System.Xml;
 using System.Collections.Generic;
 using XmlConverterJaarboek.Entities;
+using System.IO;
 
 namespace XmlConverterJaarboek
 {
@@ -32,7 +33,24 @@ namespace XmlConverterJaarboek
                 }
             }
 
-            conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.16.0;Data Source=db.mdb");
+            var filePath = "db.mdb";
+            if (!File.Exists(filePath))
+            {
+                DialogResult dr = ofdOpenFile.ShowDialog();
+
+
+                if (dr == DialogResult.OK)
+                {
+                    filePath = ofdOpenFile.FileName;
+                } else
+                {
+                    MessageBox.Show("Geen bestand gekozen, programma wordt afgesloten.");
+                    this.Close();
+                }
+
+            }
+
+            conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" + filePath);
             //using (OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db.mdb"))
             //using (OleDbConnection conn = new OleDbConnection(@"Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=db.mdb;"))
             conn.Open();
@@ -121,7 +139,7 @@ namespace XmlConverterJaarboek
                     if (shouldWriteDoctor)
                     {
                         writer.WriteElementString("_08_Gegevens", doctor.LastName.ToUpper() + " " + doctor.FirstName
-                        + (doctor.CSouMS == "CS" ? " (*)" : ""));
+                        + (doctor.CSouMS == "CS" ? Characters.FIXED_SPACE + "(*)" : ""));
                     }
 
                     lastDoctor = doctor;

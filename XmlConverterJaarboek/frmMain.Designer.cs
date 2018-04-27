@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblCurrent = new System.Windows.Forms.Label();
+            this.ofdOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // backgroundWorker
@@ -53,6 +55,12 @@
             this.lblCurrent.TabIndex = 1;
             this.lblCurrent.Text = "Waiting";
             // 
+            // ofdOpenFile
+            // 
+            this.ofdOpenFile.FileName = "db.mdb";
+            this.ofdOpenFile.Filter = "Access mdb database|*.mdb";
+            this.ofdOpenFile.Title = "Kies het .mdb databasebestand";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -61,6 +69,7 @@
             this.Controls.Add(this.lblCurrent);
             this.Controls.Add(this.progressBar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "XmlConverterJaarboek";
             this.Load += new System.EventHandler(this.FormLoad);
@@ -73,6 +82,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lblCurrent;
+        private System.Windows.Forms.OpenFileDialog ofdOpenFile;
     }
 }
 

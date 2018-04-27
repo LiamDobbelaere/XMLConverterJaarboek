@@ -23,32 +23,36 @@ namespace XmlConverterJaarboek.Entities
             List<string> details = new List<string>();
 
             if (Institution != "") details.Add(Institution);
-            if (StreetName != "") details.Add(StreetName + " " + StreetNumber);
-            if (PostalCode != "") details.Add(PostalCode + " " + Town);
+            if (StreetName != "") details.Add(StreetName + (StreetNumber != "" ? Characters.FIXED_SPACE + StreetNumber : "") + (Box != "" ? Characters.FIXED_SPACE + Box : ""));
+            if (PostalCode != "") details.Add(PostalCode + (Town != "" ? Characters.FIXED_SPACE + Town : ""));
             if (Telephone != "" && Telephone.Equals(Fax))
             {
                 if (Telephone != "")
                 {
-                    details.Add("T/F " + Telephone);
+                    details.Add("T/F" + Characters.FIXED_SPACE + Telephone.Replace("-", Characters.NOBREAK_HYPHEN));
                 }
             }
             else
             {
                 if (Telephone != "")
                 {
-                    details.Add("T " + Telephone);
+                    details.Add("T" + Characters.FIXED_SPACE + Telephone.Replace("-", Characters.NOBREAK_HYPHEN));
                 }
                 if (Fax != "")
                 {
-                    details.Add("F " + Fax);
+                    details.Add("F" + Characters.FIXED_SPACE + Fax.Replace("-", Characters.NOBREAK_HYPHEN));
                 }
             }
             if (Cellphone != "")
             {
-                details.Add("G " + Cellphone);
+                details.Add("G" + Characters.FIXED_SPACE + Cellphone.Replace("-", Characters.NOBREAK_HYPHEN));
+            }
+            if (Email != "")
+            {
+                details.Add(Email);
             }
 
-            return string.Join(" - ", details.ToArray());
+            return string.Join(Characters.FIXED_SPACE + Characters.NOBREAK_HYPHEN + Characters.FIXED_SPACE, details.ToArray());
         }
     }
 }

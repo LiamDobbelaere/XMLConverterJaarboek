@@ -97,7 +97,7 @@ namespace XmlConverterJaarboek.Properties {
   <string>PNEUMOLOGIE</string>
   <string>PSYCHIATRIE</string>
   <string>R. DIAGNOSTIC</string>
-  <string>R.THERAPIE-ONCO</string>
+  <string>R.THERAPIE-ONCO.</string>
   <string>RHUMATOLOGIE</string>
   <string>SOINS INTENSIFS</string>
   <string>STOMATOLOGIE</string>
@@ -154,6 +154,15 @@ namespace XmlConverterJaarboek.Properties {
         public global::System.Collections.Specialized.StringCollection InternalNames {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["InternalNames"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("annuaire 2018")]
+        public string TableName {
+            get {
+                return ((string)(this["TableName"]));
             }
         }
     }

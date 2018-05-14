@@ -63,7 +63,7 @@
   &lt;string&gt;PNEUMOLOGIE&lt;/string&gt;
   &lt;string&gt;PSYCHIATRIE&lt;/string&gt;
   &lt;string&gt;R. DIAGNOSTIC&lt;/string&gt;
-  &lt;string&gt;R.THERAPIE-ONCO&lt;/string&gt;
+  &lt;string&gt;R.THERAPIE-ONCO.&lt;/string&gt;
   &lt;string&gt;RHUMATOLOGIE&lt;/string&gt;
   &lt;string&gt;SOINS INTENSIFS&lt;/string&gt;
   &lt;string&gt;STOMATOLOGIE&lt;/string&gt;
@@ -99,6 +99,9 @@
   &lt;string&gt;Internistes urgentistes,Internisten urgentisten&lt;/string&gt;
   &lt;string&gt;Internistes oncologues,Internisten oncologen&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="TableName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">annuaire 2018</Value>
     </Setting>
   </Settings>
 </SettingsFile>

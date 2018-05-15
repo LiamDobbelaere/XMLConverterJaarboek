@@ -52,7 +52,7 @@ namespace XmlConverterJaarboek.Entities
                 details.Add(Email);
             }
 
-            return string.Join(Characters.FIXED_SPACE + Characters.NOBREAK_HYPHEN + Characters.FIXED_SPACE, details.ToArray());
+            return string.Join(Characters.FIXED_SPACE + Characters.NOBREAK_HYPHEN + " ", details.ToArray());
         }
     }
 }

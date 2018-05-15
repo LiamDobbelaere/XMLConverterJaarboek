@@ -100,8 +100,5 @@
   &lt;string&gt;Internistes oncologues,Internisten oncologen&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="TableName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">annuaire 2018</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

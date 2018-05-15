@@ -13,6 +13,8 @@ namespace XmlConverterJaarboek
     {
         Dictionary<string, string> provArrondMapping;
         OleDbConnection conn;
+        string specialitiesFilePath = "";
+        string alphabeticFilePath = "";
 
         public frmMain()
         {
@@ -48,6 +50,32 @@ namespace XmlConverterJaarboek
                     this.Close();
                 }
 
+            }
+
+            sfdDialog.Title = "Selecteer waar de lijst met specialiteiten moet worden opgeslagen";
+            sfdDialog.FileName = "Lijst_specialiteiten.xml";
+            sfdDialog.Filter = "eXtensible Markup Language (*.xml)|*.xml";
+            if (sfdDialog.ShowDialog() == DialogResult.OK)
+            {
+                specialitiesFilePath = sfdDialog.FileName;
+            }
+            else
+            {
+                MessageBox.Show("Geen bestand gekozen, programma wordt afgesloten.");
+                this.Close();
+            }
+
+            sfdDialog.Title = "Selecteer waar de alfabetische lijst moet worden opgeslagen";
+            sfdDialog.FileName = "Lijst_alfabetisch.xml";
+            sfdDialog.Filter = "eXtensible Markup Language (*.xml)|*.xml";
+            if (sfdDialog.ShowDialog() == DialogResult.OK)
+            {
+                alphabeticFilePath = sfdDialog.FileName;
+            }
+            else
+            {
+                MessageBox.Show("Geen bestand gekozen, programma wordt afgesloten.");
+                this.Close();
             }
 
             InputDialog id = new InputDialog();
@@ -491,7 +519,7 @@ namespace XmlConverterJaarboek
 
         private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            var writer = XmlWriter.Create("Lijst_specialiteiten.xml");
+            var writer = XmlWriter.Create(specialitiesFilePath);
             writer.WriteStartDocument(true);
             writer.WriteStartElement("Root");
 
@@ -534,7 +562,7 @@ namespace XmlConverterJaarboek
             writer.WriteEndElement();
             writer.Flush();
 
-            writer = XmlWriter.Create("Lijst_Alfabetisch.xml");
+            writer = XmlWriter.Create(alphabeticFilePath);
             writer.WriteStartElement("Root");
 
             backgroundWorker.ReportProgress(100, "Alphabetic list");

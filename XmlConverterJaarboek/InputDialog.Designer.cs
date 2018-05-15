@@ -36,10 +36,11 @@
             // btnConfirm
             // 
             this.btnConfirm.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirm.Location = new System.Drawing.Point(347, 82);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(102, 28);
-            this.btnConfirm.TabIndex = 0;
+            this.btnConfirm.TabIndex = 1;
             this.btnConfirm.Text = "OK";
             this.btnConfirm.UseVisualStyleBackColor = true;
             // 
@@ -56,16 +57,18 @@
             this.txtValue.Location = new System.Drawing.Point(12, 85);
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(329, 22);
-            this.txtValue.TabIndex = 2;
+            this.txtValue.TabIndex = 0;
             // 
             // InputDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(464, 122);
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.lblText);
             this.Controls.Add(this.btnConfirm);
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InputDialog";
             this.ResumeLayout(false);

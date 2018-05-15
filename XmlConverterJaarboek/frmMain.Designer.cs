@@ -33,6 +33,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblCurrent = new System.Windows.Forms.Label();
             this.ofdOpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.sfdDialog = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // backgroundWorker
@@ -43,6 +44,7 @@
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(12, 12);
+            this.progressBar1.MarqueeAnimationSpeed = 5000;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(516, 36);
             this.progressBar1.TabIndex = 0;
@@ -65,13 +67,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(540, 91);
             this.Controls.Add(this.lblCurrent);
             this.Controls.Add(this.progressBar1);
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "XmlConverterJaarboek";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormLoad);
             this.ResumeLayout(false);
 
@@ -83,6 +88,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lblCurrent;
         private System.Windows.Forms.OpenFileDialog ofdOpenFile;
+        private System.Windows.Forms.SaveFileDialog sfdDialog;
     }
 }
 

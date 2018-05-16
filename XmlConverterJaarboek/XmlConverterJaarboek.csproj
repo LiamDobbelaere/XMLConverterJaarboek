@@ -88,6 +88,7 @@
     <Compile Include="Entities\ContactDetails.cs" />
     <Compile Include="Entities\ExtensoDetails.cs" />
     <Compile Include="Entities\SimpleDoctor.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -135,11 +135,11 @@ namespace XmlConverterJaarboek
                 {
                     if (previousPostalCode == null || previousPostalCode != doctor.PostalCode)
                     {
-                        writer.WriteElementString("_12_Gegevens", doctor.PostalCode + " " + doctor.Town + " " + doctor.LastName + " " + doctor.FirstName + Characters.PARAGRAPH_SEP);
+                        writer.WriteElementString("_12_Gegevens", doctor.PostalCode + " " + doctor.Town + "\t" + doctor.LastName.ToUpper() + " " + doctor.FirstName.ToCapitalized() + Characters.PARAGRAPH_SEP);
                     }
                     else
                     {
-                        writer.WriteElementString("_12_Gegevens", doctor.LastName + " " + doctor.FirstName + Characters.PARAGRAPH_SEP);
+                        writer.WriteElementString("_12_Gegevens", "\t" + doctor.LastName.ToUpper() + " " + doctor.FirstName.ToCapitalized() + Characters.PARAGRAPH_SEP);
                     }
 
                     previousPostalCode = doctor.PostalCode;
@@ -158,9 +158,11 @@ namespace XmlConverterJaarboek
 
             foreach (string orderedProvince in Properties.Settings.Default.ProvArrondMapOrder)
             {
-                writer.WriteElementString("_06_Provincie", orderedProvince.ToUpper() + Characters.PARAGRAPH_SEP);
-
                 List<SimpleDoctor> doctors = docsPerProvince[orderedProvince];
+
+                if (doctors.Count > 0)
+                    writer.WriteElementString("_06_Provincie", orderedProvince.ToUpper() + Characters.PARAGRAPH_SEP);
+
                 string previousPostalCode = null;
                 SimpleDoctor lastDoctor = null;
                 foreach (SimpleDoctor doctor in doctors)
@@ -214,8 +216,9 @@ namespace XmlConverterJaarboek
                 foreach (ContactDetails contactDetails in doctor.ContactDetails)
                 {
                     var elementName = first ? "_03_Gegevens1" : "_03_Gegevens2";
+                    var details = contactDetails.GetFormattedDetails();
 
-                    writer.WriteElementString(elementName, contactDetails.GetFormattedDetails() + Characters.PARAGRAPH_SEP);
+                    writer.WriteElementString(elementName, details + (details.Trim().Length == 0 ? "" : Characters.PARAGRAPH_SEP));
 
                     first = false;
                 }
@@ -248,8 +251,9 @@ namespace XmlConverterJaarboek
                 foreach (ContactDetails contactDetails in doctor.ContactDetails)
                 {
                     var elementName = first ? "_03_Gegevens1" : "_03_Gegevens2";
+                    var details = contactDetails.GetFormattedDetails();
 
-                    writer.WriteElementString(elementName, contactDetails.GetFormattedDetails() + Characters.PARAGRAPH_SEP);
+                    writer.WriteElementString(elementName, details + (details.Trim().Length == 0 ? "" : Characters.PARAGRAPH_SEP));
 
                     first = false;
                 }

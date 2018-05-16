@@ -15,5 +15,10 @@ namespace XmlConverterJaarboek
         {
             InitializeComponent();
         }
+
+        private void InputDialog_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

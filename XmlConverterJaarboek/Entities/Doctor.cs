@@ -23,7 +23,9 @@ namespace XmlConverterJaarboek.Entities
 
         public bool IsSameDoctor(string firstName, string lastName, string inami)
         {
-            return firstName.Equals(FirstName) && lastName.Equals(lastName) && INAMI.Equals(inami);
+            return firstName.Trim().ToLower().Equals(FirstName.Trim().ToLower()) 
+                && lastName.Trim().ToLower().Equals(lastName.Trim().ToLower()) 
+                && INAMI.Trim().Equals(inami.Trim());
         }
 
         public string GetFormattedDetails()

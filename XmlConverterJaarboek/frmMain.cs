@@ -525,6 +525,7 @@ namespace XmlConverterJaarboek
         {
             var writer = XmlWriter.Create(specialitiesFilePath);
             writer.WriteStartDocument(true);
+            writer.WriteRaw(Environment.NewLine);
             writer.WriteStartElement("Root");
 
             //Properties.Settings.Default.SpecialisationOrder.Count;
@@ -567,6 +568,8 @@ namespace XmlConverterJaarboek
             writer.Flush();
 
             writer = XmlWriter.Create(alphabeticFilePath);
+            writer.WriteStartDocument(true);
+            writer.WriteRaw(Environment.NewLine);
             writer.WriteStartElement("Root");
 
             backgroundWorker.ReportProgress(100, "Alphabetic list");

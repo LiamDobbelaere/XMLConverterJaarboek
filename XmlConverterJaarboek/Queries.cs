@@ -39,9 +39,9 @@ namespace XmlConverterJaarboek
 
         public static string DOCTORS_ALPHABETIC()
         {
-            return "SELECT x.NOM, x.PRENOM, x.NoINAMI, x.InExtensoNew, x.Compétence1, x.Competence2Real " +
-            "FROM (SELECT *, IIF(SPECIALITE = \"ONCO_MED\", \"ONCO_MED\", Compétence2) AS Competence2Real, " +
-            Properties.Settings.Default.InExtensoNew + " FROM [" + TABLE_NAME + "]) AS x " +
+            return "SELECT x.NOM, x.PRENOM, x.NoINAMI, x.InExtenso, x.Compétence1, x.Competence2Real " +
+            "FROM (SELECT *, IIF(SPECIALITE = \"ONCO_MED\", \"ONCO_MED\", Compétence2) AS Competence2Real " +
+            "FROM [" + TABLE_NAME + "]) AS x " +
             "ORDER BY x.NOM, x.PRENOM";
         }
     }

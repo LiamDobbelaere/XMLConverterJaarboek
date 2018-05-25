@@ -399,7 +399,7 @@ namespace XmlConverterJaarboek
                     var containsExtenso = false;
                     foreach (ExtensoDetails ed in newDoctor.Extensos)
                     {
-                        if (ed.Name.Equals(reader["InExtensoNew"].ToString()))
+                        if (ed.Name.Equals(reader["InExtenso"].ToString()))
                         {
                             containsExtenso = true;
                         }
@@ -415,7 +415,7 @@ namespace XmlConverterJaarboek
 
                         var newExtenso = new ExtensoDetails
                         {
-                            Name = reader["InExtensoNew"].ToString(),
+                            Name = reader["InExtenso"].ToString(),
                             Competences = competenceString
                         };
 
@@ -439,7 +439,7 @@ namespace XmlConverterJaarboek
 
                     var newExtenso = new ExtensoDetails
                     {
-                        Name = reader["InExtensoNew"].ToString(),
+                        Name = reader["InExtenso"].ToString(),
                         Competences = competenceString
                     };
 

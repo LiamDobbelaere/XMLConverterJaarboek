@@ -68,13 +68,13 @@
   &lt;string&gt;SOINS INTENSIFS&lt;/string&gt;
   &lt;string&gt;STOMATOLOGIE&lt;/string&gt;
   &lt;string&gt;UROLOGIE&lt;/string&gt;
-  &lt;string&gt;READAPTION&lt;/string&gt;
+  &lt;string&gt;READAPTATION&lt;/string&gt;
   &lt;string&gt;HEALTH DATA MAN.&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="InExtensoNew" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(InExtenso, 'KLINISCHE BIOL.', 'BIOL. CLINIQUE'), 'PLASTISCHE CH.', 'CH. PLASTIQUE'), 'MAAG-DARM.', 'GASTRO-ENTERO.'), 'URGENTIEGEN.', 'MED. URGENCE'), 'INWENDIGE GEN.', 'MED. INTERNE'),
-          'KERNGENEESKUNDE', 'MED. NUCLEAIRE'), 'FYSISCHE GEN.', 'MED. PHYSIQUE'), 'KINDERNEUROLOGIE', 'NEUROPEDIATRIE'), 'OOGHEELKUNDE', 'OPHTALMOLOGIE'), 'KINDERGEN.', 'PEDIATRIE'), 'R. DIAGNOSE', 'R. DIAGNOSTIC'), 'REUMATOLOGIE', 'RHUMATOLOGIE'), 'INTENS. ZORGEN', 'SOINS INTENSIFS'), 'REVALIDATIE', 'READAPTION'), 'N.K.O.', 'O.R.L.') AS InExtensoNew</Value>
+          'KERNGENEESKUNDE', 'MED. NUCLEAIRE'), 'FYSISCHE GEN.', 'MED. PHYSIQUE'), 'KINDERNEUROLOGIE', 'NEUROPEDIATRIE'), 'OOGHEELKUNDE', 'OPHTALMOLOGIE'), 'KINDERGEN.', 'PEDIATRIE'), 'R. DIAGNOSE', 'R. DIAGNOSTIC'), 'REUMATOLOGIE', 'RHUMATOLOGIE'), 'INTENS. ZORGEN', 'SOINS INTENSIFS'), 'REVALIDATIE', 'READAPTATION'), 'N.K.O.', 'O.R.L.') AS InExtensoNew</Value>
     </Setting>
     <Setting Name="InternalOrder" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
